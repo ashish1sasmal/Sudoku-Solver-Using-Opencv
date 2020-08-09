@@ -1,4 +1,4 @@
-# Sudoku-Solver-Using-Opencv
+# Sudoku-Solver-Using-Opencv <img src="https://img.icons8.com/wired/64/000000/sudoku.png" width=50>
 
 #### "Solving wits and puzzles, in a way, helps to develop wit and ingenuity. "
     -- Shakuntala Devi
