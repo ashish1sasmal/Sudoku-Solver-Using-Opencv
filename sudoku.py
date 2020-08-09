@@ -6,9 +6,11 @@ from digit_recognition import digits
 
 from sudoku_solver import solve_sudoku
 
+import time
+
 cv2.namedWindow("Sudoku",cv2.WINDOW_NORMAL)
 
-img = cv2.imread("sudoku2.jpg")
+img = cv2.imread("Tests/sudoku.jpg")
 
 img = cv2.resize(img, (260,260),interpolation = cv2.INTER_CUBIC)
 
@@ -35,9 +37,6 @@ for i in range(9):
 
 boxarea = cv2.contourArea(cnts[0])//81
 
-
-
-
 ind=0
 
 for (i,c) in enumerate(cnts):
@@ -57,6 +56,7 @@ for (i,c) in enumerate(cnts):
         # out = cv2.rectangle(out,(x,y),(x+w,y+h),(0,255,0),2)
         # print(digits(img[y:y+h, x:x+w]))
         # print(ind,ind//9)
+        cv2.imwrite(f"temp/gr_{ind/9}_{ind%9}.jpg",img[y:y+h, x:x+w])
         m1 = int(x+w/2)
         m2 = int(y+h/2)
         sorted_grid[ind//9].append([[x,y],[w,h],[(m1+m2)//2],c])
@@ -89,6 +89,7 @@ solved_grid = solve_sudoku(grid)
 
 print("[Sudoku Solved !].....")
 
+# cv2.waitKey(0)
 for i in range(9):
     for j in range(9):
         cell = sorted_grid[i][j]
@@ -97,6 +98,7 @@ for i in range(9):
         if cell[-1] == 0:
             cv2.putText(out, str(solved_grid[i][j]),(int(x+w/2)-5, int(y+h/2)+5),cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
 
+        cv2.imshow("Sudoku",out)
+        cv2.waitKey(0)
+
 cv2.imwrite("Results/sudoku_sol1.jpg",out)
-cv2.imshow("Sudoku",out)
-cv2.waitKey(0)
